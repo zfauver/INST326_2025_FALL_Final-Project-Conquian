@@ -60,6 +60,8 @@ def force_meld(self, current_draw):
     #checks if the card can be melded first, needs to know the current card and
     # the opponents hand
     can_be_forced = self.check_if_meldable(current_draw, self.opponent)
+
+    #if the card cant be melded return false so that the player does not force the meld
     if can_be_forced == False:
         return False
     
@@ -68,7 +70,7 @@ def force_meld(self, current_draw):
     # >=6 cards and if the player's hand is <=4 so that a meld should
     # only be forced when wining 
     
-    decision = False
+    decision = False #default is not to force the meld unless conditions are right
     if len(self.opponent.hand) >= 8 and len(self.hand) <=4 :
          decision = True
     return decision
@@ -76,5 +78,6 @@ def force_meld(self, current_draw):
     
 # Amon Bayu
 # Sean Liu
+
 
 
