@@ -78,6 +78,28 @@ def force_meld(self, current_draw):
     
 # Amon Bayu
 # Sean Liu
+def check_if_meldable(current_draw, opposing_player):
+    VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 'J':8, 'Q':9, 'K':10}
+    
+    
+    #  Loop has two checks:
+    #  Is meld a set? Uses the card[0] meaning if a card is "7C", it grabs char 7. Casts meld into a set to remove
+    #  duplicates. If the entire set is only length 1, it's a set. 
 
-
-
+    #  Is current draw equal to opponent's meld's first card? if so, it is able to be melded.
+    
+    for meld in opposing_player.melds:
+        if len(set(card[0] for card in meld)) == 1:
+            if current_draw[0] == meld[0][0]:
+                return True
+        # If not a set, we check if meld is a sequence instead, if second index of char is C, we check meld's second char
+        # Values list conversion required because of A J Q K
+        # Equals C? Then we create a values list. We also create a card value var that is the current draw's value
+        # Is Card Value a increment or decrement by 1 of values in mend? If so, then it is mendable.
+        else:
+            if current_draw[1] == meld[0][1]:
+                values = sorted([VALUES[card[0]] for card in meld])
+                card_val = VALUES[current_draw[0]]
+                if card_val == values[0] - 1 or card_val == values[-1] + 1:
+                    return True
+    return False
