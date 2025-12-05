@@ -45,6 +45,21 @@ def optimal_meld(self, hand, top_card):
     best = []
     best_count = 0
 
+    for m in melds:
+        hand_count = sum(1 for c in m if c in hand)
+        use_top = top_card in m
+        
+        score = (hand_count, use_top, len(m))
+        best_score = (best_count, top_card in best, len(best))
+        
+        if score > best_score:
+            best = m
+            best_count = hand_count
+    
+    if best_count == 0:
+        return([], False)
+    return (best, top_card in best)
+
 # Zachary Fauver
 ##Funtion requires a helper funtion that determines if a card can be melded
 def force_meld(self, current_draw):
@@ -149,3 +164,4 @@ def check_if_meldable(current_draw, opposing_player):
                     return True
 
     return False
+
