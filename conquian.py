@@ -1,8 +1,12 @@
-# 
+import random
+import sys
+import argparse
+
 class Player: 
-    def __init__(self, hand, melds):
+    def __init__(self, hand, melds, name):
         self.hand = []
         self.melds = []
+        self.name = name
 
     # Baran Sayan
     def optimal_meld(self, hand, top_card):
@@ -201,3 +205,20 @@ class Player:
 class Conquian:
     def __init__(self):
         pass
+        
+    def create_deck(self):
+        #40 card deck without 8, 9, 10
+        pass
+    
+    def deal(self):
+        pass
+    
+    def game_state(self):
+        pass
+    
+    def win_condition(self):
+        pass
+    
+    def run(self):
+        pass
+    
