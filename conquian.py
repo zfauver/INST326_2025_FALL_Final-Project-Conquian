@@ -92,51 +92,79 @@ def force_meld(self, current_draw):
     
     
 # Amon Bayu
-def valid_play(self, available_cards, existing_melds, remaining_cards):
+def valid_play(self, available_cards, existing_melds, cards):
     """
     Checks if card can be played by changing, rearanging, or building new melds
    
     Args:
         avaliable_cards (list): A list of card strings in the player's hand.
         existing_melds (list): A list of melds. Each meld is a list of card strings.
-        remaining_cards (list): The card we want to check for playability.
+        cards (str): The card we want to check for playability.
     
     Returns:
         tuple: 
             played_card (str): The card that was played.
             updated_melds (list): The updated list of melds after the play.
     """
-    ranks = {}
-    for c in available_cards:
-        rank = c[:-1]
-        if rank not in ranks:
-            ranks[rank] = []
-        ranks[rank].append(c)
-        
-        if len (ranks[rank]) == 3:
-            new_meld = ranks[rank]
-            return (new_meld[0], new_meld + existing_melds)
-    suits = {}
-    for c in available_cards:
-        suit = c[1]
-        if suit not in suits:
-            suits[suit] = []
-        suits[suit].append(c)
+    VALUES = {
+    'A':1, '2':2, '3':3, '4':4, '5':5,
+    '6':6, '7':7, 'J':8, 'Q':9, 'K':10
+    }   
 
-        if len(suits[s]) == 3:
-            new_meld = suits[s]
-            return (new_meld[0], new_meld + existing_melds)
+    rank = cards[:-1]
+    suit = cards[-1]
+    
+    same_rank = []
+    for c in available_cards:
+        if c[:-1] == rank:
+            same_rank.append(c)
+    if len(same_rank) >= 3:
+        new_meld = same_rank[:3]
+        updated_melds = existing_melds[:] + [new_meld]
+        return (cards, updated_melds)
+    
+    
+    same_suit = []
+    for c in available_cards:
+        if c[-1] == suit:
+            same_suit.append(c)
+    if len(same_suit) >= 3:
+        same_suit.sort(key=lambda c: VALUES[c[:-1]])
+            
+        run = [same_suit[0]]
+        i = 1
+        while i < len(same_suit):
+            if VALUES[same_suit[i][:-1]] == VALUES[run[-1][:-1]] + 1:
+                run.append(same_suit[i])
+            else:
+                if len(run) >= 3:
+                    break
+                run = [same_suit[i]]
+            i += 1
+        if len(run) >= 3 and cards in run:
+            new_meld = run
+            updated_melds = existing_melds[:] + [new_meld]
+            return (cards, updated_melds)
         
     for meld in existing_melds:
-        if len(meld) >= 4:
-            borrowed_card = meld[0]
-            new_meld = [borrowed_card] + available_cards[:2]
-            updated_melds = [m for m in existing_melds if m != meld]
+        if all(m[:-1] == rank for m in meld):
+            new_meld = meld + [cards]
+            updated_melds = existing_melds[:]
+            updated_melds.remove(meld)
             updated_melds.append(new_meld)
-            updated_melds.append(meld[1:])
-            return (borrowed_card, updated_melds)
-        
-    return (available_cards[0], existing_melds)
+            return (cards, updated_melds)
+    for meld in existing_melds:
+        if all(m[-1] == suit for m in meld):
+            values = sorted([VALUES[m[:-1]] for m in meld])
+            val = VALUES[cards[:-1]]
+
+            if val == values[0] - 1 or val == values[-1] + 1:
+                new_meld = meld + [cards]
+                updated_melds = existing_melds[:]
+                updated_melds.remove(meld)
+                updated_melds.append(new_meld)
+                return (cards, updated_melds)
+    return (None, existing_melds)
 # Sean Liu
 def check_if_meldable(current_draw, opposing_player):
     VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 'J':8, 'Q':9, 'K':10}
@@ -164,4 +192,5 @@ def check_if_meldable(current_draw, opposing_player):
                     return True
 
     return False
+
 
