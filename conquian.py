@@ -2,10 +2,12 @@ import random
 import sys
 import argparse
 
+VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 'J':8, 'Q':9,'K':10}
+
 class Player: 
     def __init__(self, hand, melds, name):
-        self.hand = []
-        self.melds = []
+        self.hand = hand
+        self.melds = melds
         self.name = name
 
     # Baran Sayan
@@ -202,13 +204,27 @@ class Player:
 
         return False
 
+
+#game class
 class Conquian:
     def __init__(self):
-        pass
-        
-    def create_deck(self):
+        self.deck = self.create_deck()
+        self.discard_pile = []
+
+    def create_deck(self): #Zach F
         #40 card deck without 8, 9, 10
-        pass
+        #creates a deck with the following ranks and suits
+        ranks = ["A","2","3","4","5","6","7","J","Q","K"]
+        suits = ["H","D","C","S"]
+        deck = []
+        #combines the ranks and suits into one card, like a real card deck
+        for s in suits:
+            for r in ranks:
+                deck.append(r+s)
+        random.shuffle(deck)
+        return deck
+        
+        return deck
     
     def deal(self):
         pass
@@ -221,4 +237,9 @@ class Conquian:
     
     def run(self):
         pass
+    
+    
+if __name__ == "__main__":
+    game = Conquian()
+    game.run()
     
