@@ -106,10 +106,7 @@ def valid_play(self, available_cards, existing_melds, cards):
             played_card (str): The card that was played.
             updated_melds (list): The updated list of melds after the play.
     """
-    VALUES = {
-    'A':1, '2':2, '3':3, '4':4, '5':5,
-    '6':6, '7':7, 'J':8, 'Q':9, 'K':10
-    }   
+      
 
     rank = cards[:-1]
     suit = cards[-1]
@@ -192,5 +189,6 @@ def check_if_meldable(current_draw, opposing_player):
                     return True
 
     return False
+
 
 
