@@ -9,6 +9,7 @@ class Player:
         self.hand = hand
         self.melds = melds
         self.name = name
+        self.opponent = None
 
     # Baran Sayan
     def optimal_meld(self, hand, top_card):
@@ -214,6 +215,11 @@ class Conquian:
         self.stock = []
 
     def create_deck(self): #Zach F
+        """
+        Docstring for create_deck
+        
+        :param self: Description
+        """
         #40 card deck without 8, 9, 10
         #creates a deck with the following ranks and suits
         ranks = ["A","2","3","4","5","6","7","J","Q","K"]
@@ -229,6 +235,11 @@ class Conquian:
         return deck
     
     def deal(self):
+        """
+        Docstring for deal
+        
+        :param self: Description
+        """
         player1 = Player(self.deck[:10], [], "player1")
         cpu = Player(self.deck[10:20], [], "cpu")
         player1.opponent = cpu
@@ -237,6 +248,11 @@ class Conquian:
         self.stock = self.deck[20:]
     
     def game_state(self):
+        """
+        Docstring for game_state
+        
+        :param self: Description
+        """
         for p in self.players:
             print(f"{p.name} hand: {p.hand}")
             print(f"{p.name} melds: {p.melds}")
@@ -248,6 +264,11 @@ class Conquian:
         return meld_count >= 11
     
     def run(self):
+        """
+        Docstring for run
+        
+        :param self: Description
+        """
         parser = argparse.ArgumentParser()
         args = parser.parse_args()
         
@@ -314,4 +335,3 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
-
