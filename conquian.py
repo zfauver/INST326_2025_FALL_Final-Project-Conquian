@@ -5,6 +5,7 @@ import argparse
 VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 'J':8, 'Q':9,'K':10}
 
 class Player: 
+    """"""
     def __init__(self, hand, melds, name):
         self.hand = hand
         self.melds = melds
@@ -208,6 +209,7 @@ class Player:
 
 #game class
 class Conquian:
+    """"""
     def __init__(self):
         self.deck = self.create_deck()
         self.discard_pile = []
@@ -216,9 +218,7 @@ class Conquian:
 
     def create_deck(self): #Zach F
         """
-        Docstring for create_deck
-        
-        :param self: Description
+     
         """
         #40 card deck without 8, 9, 10
         #creates a deck with the following ranks and suits
@@ -236,9 +236,7 @@ class Conquian:
     
     def deal(self):
         """
-        Docstring for deal
-        
-        :param self: Description
+    
         """
         player1 = Player(self.deck[:10], [], "player1")
         cpu = Player(self.deck[10:20], [], "cpu")
@@ -246,12 +244,19 @@ class Conquian:
         cpu.opponent = player1
         self.players = [player1, cpu]
         self.stock = self.deck[20:]
+    def use_force_meld(self,player,card):
+        """
+        
+        self: 
+        player: 
+        card: 
+        """
+        pass
+        
     
     def game_state(self):
         """
-        Docstring for game_state
         
-        :param self: Description
         """
         for p in self.players:
             print(f"{p.name} hand: {p.hand}")
@@ -265,9 +270,7 @@ class Conquian:
     
     def run(self):
         """
-        Docstring for run
-        
-        :param self: Description
+     
         """
         parser = argparse.ArgumentParser()
         args = parser.parse_args()
