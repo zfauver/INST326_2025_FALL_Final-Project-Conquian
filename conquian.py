@@ -210,6 +210,8 @@ class Conquian:
     def __init__(self):
         self.deck = self.create_deck()
         self.discard_pile = []
+        self.players = []
+        self.stock = []
 
     def create_deck(self): #Zach F
         #40 card deck without 8, 9, 10
@@ -227,19 +229,89 @@ class Conquian:
         return deck
     
     def deal(self):
-        pass
+        player1 = Player(self.deck[:10], [], "player1")
+        cpu = Player(self.deck[10:20], [], "cpu")
+        player1.opponent = cpu
+        cpu.opponent = player1
+        self.players = [player1, cpu]
+        self.stock = self.deck[20:]
     
     def game_state(self):
-        pass
+        for p in self.players:
+            print(f"{p.name} hand: {p.hand}")
+            print(f"{p.name} melds: {p.melds}")
+        print(f"Discard pile: {self.discard_pile}")
+        print(f"Stock remaining: {len(self.stock)}")
     
-    def win_condition(self):
-        pass
+    def win_condition(self, player):
+        meld_count = sum(len(m) for m in player.melds)
+        return meld_count >= 11
     
     def run(self):
-        pass
-    
+        parser = argparse.ArgumentParser()
+        args = parser.parse_args()
+        
+        self.deal()
+        turn = 0 # 0 is player1, 1 is cpu
+        
+        while len(self.stock) > 0:
+            player = self.players[turn]
+            print(f"\n{player.name}'s turn")
+            self.game_state()
+            
+            draw = self.stock.pop(0)
+            print(f"{player.name} drew {draw}")
+            player.hand.append(draw)
+            
+            if player.name == "player1": #player1 choice to meld
+                choice = input(f"Do you want to meld {draw}? " 
+                               f"(y/n)").strip().lower()
+                if choice == "y":
+                    play, update = player.valid_play(player.hand, player.melds,
+                                                     draw)
+                    if play:
+                        player.melds = update
+                        for c in update[-1]:
+                            if c in player.hand:
+                                player.hand.remove(c)
+                        print(f"You melded {update[-1]}")
+                    else:
+                        print("No valid meld found, discarding")
+                        self.discard_pile.append(draw)
+                        player.hand.remove(draw)
+                else:
+                    self.discard_pile.append(draw)
+                    player.hand.remove(draw)
+            
+                if player.hand: #player1 discard
+                    discard = input(f"Choose a card to discard from your hand "
+                                    f"{player.hand}: ").strip().upper()
+                    if discard in player.hand:
+                        player.hand.remove(discard)
+                        self.discard_pile.append(discard)
+            
+            else: #cpu
+                meld, used_top = player.optimal_meld(player.hand, draw)
+                if meld:
+                    player.melds.append(meld)
+                    for c in meld:
+                        if c in player.hand:
+                            player.hand.remove(c)
+                    print(f"CPU melded {meld}")
+                else:
+                    discard = player.hand.pop(0)
+                    self.discard_pile.append(discard)
+                    print(f"CPU discarded {discard}")    
+            
+            if self.win_condition(player):
+                print(f"{player.name} wins!")
+                return
+            turn = 1 - turn # switch between cpu and player turn
+
+        print("Stock exhausted. Tie.")
     
 if __name__ == "__main__":
     game = Conquian()
     game.run()
     
+
