@@ -5,8 +5,15 @@ import argparse
 VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 'J':8, 'Q':9,'K':10}
 
 class Player: 
-    """"""
+    """ Represents a player in the game """
     def __init__(self, hand, melds, name):
+        """Initalizes a Player 
+        Args:
+            hand(list): a list of strings that represent the cards in
+                the player's hand
+            melds(list): A list of lists, that contains valid melds
+            name(str): The name of the player 
+            """
         self.hand = hand
         self.melds = melds
         self.name = name
@@ -209,8 +216,10 @@ class Player:
 
 #game class
 class Conquian:
-    """"""
+    """ A class that manages the game state and rules of the game"""
     def __init__(self):
+        """Initalizes the game, creates the deck, discard pile, 
+            players, and stock"""
         self.deck = self.create_deck()
         self.discard_pile = []
         self.players = []
@@ -218,7 +227,10 @@ class Conquian:
 
     def create_deck(self): #Zach F
         """
-     
+        Creates and shuffles the 40 card deck, removing 8, 9, and 10
+        
+        Returns:
+            list: a list of string representing cards
         """
         #40 card deck without 8, 9, 10
         #creates a deck with the following ranks and suits
@@ -246,8 +258,7 @@ class Conquian:
         self.stock = self.deck[20:]
     def use_force_meld(self,player,card):
         """
-        
-        self: 
+         
         player: 
         card: 
         """
@@ -265,6 +276,12 @@ class Conquian:
         print(f"Stock remaining: {len(self.stock)}")
     
     def win_condition(self, player):
+        """ Checks if a player has met the winning conditions
+        Args:
+            player(Player): The player being checked
+        Returns:
+            bool: True if the player has exactly 11 cards melded
+            """
         meld_count = sum(len(m) for m in player.melds)
         return meld_count >= 11
     
