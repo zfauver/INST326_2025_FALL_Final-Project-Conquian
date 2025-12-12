@@ -5,7 +5,7 @@ The card game Conquian in Python
 Presentation: 
 https://www.canva.com/design/DAG7DD3Jm2s/ycKLf6tUfal2PK3Vc7MzHw/edit?utm_content=DAG7DD3Jm2s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
-Expalnation of each file:
+Explanation of each file:
 - conquian.py: the main file for the game
 - read.me: Document explaining the project and how the program works.
 
