@@ -113,11 +113,12 @@ class Player:
         # only be forced when winning 
         
         decision = False #default is not to force the meld unless conditions are right
-        if len(self.opponent.hand) >= 6 and len(self.hand) <=6 :
+        if can_be_forced:
             decision = True
         return decision
         
         
+    # Amon Bayu
     # Amon Bayu
     def valid_play(self, available_cards, existing_melds, cards):
         """
@@ -189,8 +190,6 @@ class Player:
                     updated_melds.append(new_meld)
                     return (cards, updated_melds)
         return (None, existing_melds)
-
-    # Amon Bayu
 
     def unmelded_cards(self):
         """ Calculates the value of cards that are not melded
@@ -372,12 +371,12 @@ class Conquian:
             #checks if the card fits into a run with the same suit   
             # and has sequential values
             elif meld[0][1] == card[1]:
-                vals = [VALUES[c[0]] for c in meld]
+                vals = sorted([VALUES[c[0]] for c in meld])
                 card_val = VALUES[card[0]]
                 
                 #determines if the card is in sequence by checkong if
                 #the value is 1 above or 1 below
-                if card_val == min(vals) - 1 or card_val == max(vals) +1:
+                if card_val == vals[0] - 1 or card_val == vals[-1] +1:
                     meld.append(card)
                     #sorts the run
                     meld.sort(key=lambda x: VALUES[x[0]])
@@ -413,7 +412,7 @@ class Conquian:
         meld_count = sum(len(m) for m in player.melds)
         return meld_count >= 11
     
-    def run(self): #Amon
+    def run(self):
         """Executes the main game loop for Conquian. Alternates turns between
            player1 and cpu, handles drawing from stock pile or discard pile,
            manages discards, checks win condition after every turn, allows for
@@ -599,8 +598,5 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
-
-
-
 
 
