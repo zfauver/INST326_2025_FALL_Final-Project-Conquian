@@ -38,6 +38,7 @@ Attribution:
 | create_deck| Zachary Fauver  | optional parameters and/or keyword arguments   |
 | use_force_meld| Zachary Fauver  | f-strings containing expressions   |
 | valid_play | Amon Bayu | lambda expressions |
+| unmelded_cards | Amon Bayu | Set operations (difference) |
 
 
 
