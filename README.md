@@ -24,7 +24,7 @@ Bibliography:
 - "Conquian." Bicycle Cards, https://bicyclecards.com/how-to-play/conquian
   - Used to learn the rules of the game and decide what functions need to be implemented in order to make a functioning version of the game
   
-Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
+Attribution: 
 
 |Method/function|Primary author|Techniques demonstrated|
 |---------------|--------------|-----------------------|
@@ -33,8 +33,3 @@ Attribution: in order to evaluate whether each member has made a substantial, or
 | check_if_meldable| Sean Liu  | List comprehension    |
 
 
-Method/function	Primary author 	Techniques demonstrated
-Tunnel.find_connections	Avery Student	sequence unpacking
-parse_args	Frankie Learner	ArgumentParser class
-
-In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
