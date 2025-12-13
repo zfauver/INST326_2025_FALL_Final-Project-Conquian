@@ -202,10 +202,11 @@ class Player:
         for meld in self.melds:
             for card in meld:
                 melded_cards.add(card)
+        unmelded = set(self.hand) - melded_cards
+        
         total = 0
-        for card in self.hand:
-            if card not in melded_cards:
-                total += VALUES[card[:-1]]
+        for card in unmelded:
+           total += VALUES[card[0]]
         
         return total
 
@@ -596,3 +597,4 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
+
