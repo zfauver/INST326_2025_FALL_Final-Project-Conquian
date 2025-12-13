@@ -119,7 +119,6 @@ class Player:
         
         
     # Amon Bayu
-    # Amon Bayu
     def valid_play(self, available_cards, existing_melds, cards):
         """
         Checks if card can be played by changing, rearanging, or building new melds
@@ -190,6 +189,8 @@ class Player:
                     updated_melds.append(new_meld)
                     return (cards, updated_melds)
         return (None, existing_melds)
+
+    # Amon Bayu
 
     def unmelded_cards(self):
         """ Calculates the value of cards that are not melded
@@ -598,6 +599,7 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
+
 
 
 
