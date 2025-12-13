@@ -389,7 +389,7 @@ class Conquian:
                 playerforced.hand.remove(card)
                 
                 
-    def game_state(self):
+    def game_state(self):  #Sean Liu
         """Prints the current state of the game. (Each player's hand, melds,
            the stock size, and the discard pile).
         """
@@ -598,5 +598,6 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
+
 
 
