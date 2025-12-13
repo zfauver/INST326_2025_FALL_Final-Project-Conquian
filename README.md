@@ -30,6 +30,7 @@ Attribution: in order to evaluate whether each member has made a substantial, or
 |---------------|--------------|-----------------------|
 | optimal_meld  | Baran Sayan  | Generator expression  |
 | meld_from_hand| Baran Sayan  | lambda expressions    |
+| check_if_meldable| Sean Liu  | List comprehension    |
 
 
 Method/function	Primary author 	Techniques demonstrated
