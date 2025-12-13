@@ -16,9 +16,13 @@ Running the game:
   - the card you would like to meld needs to be inputed (required)
 
 
-
-Clear instructions on how to use your program and/or interpret the output of the program. Anything the user might encounter while using your program that a random person on the street would not find self-explanatory needs to be explained in your instructions.
-
+Instructions:
+ - Users need to answer prompts with their decisions
+      - whether to meld or not
+      - whether to take a card from the discard pile or the stock pile
+ - Both of the players hands and melds are shown
+ - Stock shows the remaining cards, once this hits 0 the game ends at a tie.
+ - Discards are shown as a list
 
 Bibliography:
 - "Conquian." Bicycle Cards, https://bicyclecards.com/how-to-play/conquian
