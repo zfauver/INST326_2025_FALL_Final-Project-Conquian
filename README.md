@@ -26,6 +26,12 @@ Bibliography:
   
 Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
 
+|Method/function|Primary author|Techniques demonstrated|
+|---------------|--------------|-----------------------|
+| optimal_meld  | Baran Sayan  | Generator expression  |
+| meld_from_hand| Baran Sayan  | lambda expressions    |
+
+
 Method/function	Primary author 	Techniques demonstrated
 Tunnel.find_connections	Avery Student	sequence unpacking
 parse_args	Frankie Learner	ArgumentParser class
