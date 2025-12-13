@@ -31,5 +31,6 @@ Attribution:
 | optimal_meld  | Baran Sayan  | Generator expression  |
 | meld_from_hand| Baran Sayan  | lambda expressions    |
 | check_if_meldable| Sean Liu  | List comprehension    |
+| create_deck| Zachary Fauver  | optional parameters and/or keyword arguments    |
 
 
