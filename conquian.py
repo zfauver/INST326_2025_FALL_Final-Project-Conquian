@@ -83,9 +83,7 @@ class Player:
                 best = m
                 best_count = hand_count
         
-        if best_count == 0:
-            return([], False)
-        return (best, top_card in best)
+        return (best, top_card in best) if best_count > 0 else ([], False)
 
     # Zachary Fauver
     ##Funtion requires a helper funtion that determines if a card can be melded
@@ -593,3 +591,4 @@ if __name__ == "__main__":
     game = Conquian()
     game.run()
     
+
